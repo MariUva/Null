@@ -79,12 +79,13 @@ public class GestionEmpleadoController {
 		String codigo = txtCodigo.getText();
 		String sueldo = this.txtSueldo.getText();
 
-
+		try{
 			if (datosValidos(nombre, codigo, sueldo)) {
 				crearEmpleado(nombre, codigo, sueldo);
 				actualizarTabla();
 			}
-
+		} catch (Exception ignored) {
+		}
 
 		// empleadito.guardarEmpleado(empleadito.getNombre(),
 		// empleadito.getCodigo(), empleadito.getSueldo());
@@ -102,7 +103,6 @@ public class GestionEmpleadoController {
 	}
 
 	private void crearEmpleado(String nombre, String codigo, String sueldo) {
-		try{
 		double sueldoAux = sueldoADouble(sueldo);
 		Empleados empleado = aplicacion.crearEmpleados(nombre, codigo, sueldoAux);
 
@@ -118,9 +118,7 @@ public class GestionEmpleadoController {
 		}
 
 
-		}catch (Exception ignored){
 
-		}
 
 	}
 
