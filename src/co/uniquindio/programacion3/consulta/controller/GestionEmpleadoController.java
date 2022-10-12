@@ -77,26 +77,36 @@ public class GestionEmpleadoController {
 
 		String nombre = txtNombre.getText();
 		String codigo = txtCodigo.getText();
+		String sueldo = this.txtSueldo.getText();
+
 
 		try {
 
-			double sueldo = Double.parseDouble(this.txtSueldo.getText());
-
 			if (datosValidos(nombre, codigo, sueldo)) {
-				crearEmpleado(nombre, codigo, sueldo);
-
+				double sueldoAux = sueldoADouble(sueldo);
+				crearEmpleado(nombre, codigo, sueldoAux);
 				actualizarTabla();
 			}
 
 		} catch (Exception e) {
 
-			mostrarMensaje("Notificación Empleado", "Empleado no guardado",
+			mostrarMensaje("Notificacin Empleado", "Empleado no guardado",
 					"El empleado " + nombre + " no ha sido guardado", AlertType.WARNING);
 		}
 
 		// empleadito.guardarEmpleado(empleadito.getNombre(),
 		// empleadito.getCodigo(), empleadito.getSueldo());
 
+	}
+
+	private double sueldoADouble(String sueldo) {
+		double sueldoAux = 0;
+		try {
+			sueldoAux = Double.parseDouble(sueldo);
+		}catch (Exception e){
+			mostrarMensaje("Advertencia", "Informaciï¿½n del empleado invalida", "Ingrese un valor numerico en el sueldo", AlertType.WARNING);
+		}
+		return sueldoAux;
 	}
 
 	private void crearEmpleado(String nombre, String codigo, double sueldo) {
@@ -106,10 +116,10 @@ public class GestionEmpleadoController {
 		if (empleado != null) {
 			listadoEmpleados.add(0, empleado);
 			listadoEmpleados.add(empleado);
-			mostrarMensaje("Notificación Empleado", "Empleado guardado",
+			mostrarMensaje("Notificaciï¿½n Empleado", "Empleado guardado",
 					"El empleado " + empleado.getNombre() + " ha sido guardado", AlertType.INFORMATION);
 		} else {
-			mostrarMensaje("Notificación Empleado", "Empleado no guardado",
+			mostrarMensaje("Notificaciï¿½n Empleado", "Empleado no guardado",
 					"El empleado " + nombre + " no ha sido guardado", AlertType.WARNING);
 		}
 
@@ -136,29 +146,40 @@ public class GestionEmpleadoController {
 	/*
 	 * Metodo que permite verificar si todos los campos han sido dilingeciados
 	 */
-	private boolean datosValidos(String nombre, String codigo, double sueldo) {
+	private boolean datosValidos(String nombre, String codigo, String sueldo) {
+
+		boolean flag = true;
 		String notificacion = "";
 
 		if (nombre == null || nombre.equals("")) {
-			notificacion += "Nombre no tiene información\n";
+			notificacion += "Nombre no tiene informaciï¿½n\n";
 
 		}
 		if (codigo == null || codigo.equals("")) {
-			notificacion += "Codigo no tiene información\n";
+			notificacion += "Codigo no tiene informaciï¿½n\n";
 
 		}
 
-		 if (sueldo == 0) {
-		 notificacion += "Sueldo no tiene información\n";
+		 if (sueldo.equals("")) {
+			 flag = false;
+		 	notificacion += "Sueldo no tiene informaciï¿½n\n";
 
 		 }
+		if(flag){
+			try {
+				double sueldoAux = Double.parseDouble(sueldo);
+			}catch (Exception e){
+				notificacion += "El sueldo debe contener valores numericos";
+			}
+
+		}
 
 		if (notificacion.equals("")) {
 			return true;
 
 		}
 
-		mostrarMensaje("Advertencia", "Información del empleado invalida", notificacion, AlertType.WARNING);
+		mostrarMensaje("Advertencia", "Informaciï¿½n del empleado invalida", notificacion, AlertType.WARNING);
 		return false;
 	}
 
@@ -181,17 +202,17 @@ public class GestionEmpleadoController {
 
 		if (empleadoSeleccion != null) {
 			if (aplicacion.eliminarEmpleados(empleadoSeleccion.getCodigo())) {
-				mostrarMensaje("Información", "Empleado  eliminado", "El empleado ha sido eliminado", AlertType.ERROR);
+				mostrarMensaje("Informaciï¿½n", "Empleado  eliminado", "El empleado ha sido eliminado", AlertType.ERROR);
 			} else {
 
-				mostrarMensaje("Información", "Empleado selección", "No se ha realizado la selección de un empleado",
+				mostrarMensaje("Informaciï¿½n", "Empleado selecciï¿½n", "No se ha realizado la selecciï¿½n de un empleado",
 						AlertType.INFORMATION);
 
 			}
 
 			listadoEmpleados.remove(empleadoSeleccion);
 		} else {
-			mostrarMensaje("Advertencia", "Empleado selección", "No se ha realizado una seleccion de un empleado",
+			mostrarMensaje("Advertencia", "Empleado selecciï¿½n", "No se ha realizado una seleccion de un empleado",
 					AlertType.ERROR);
 
 		}
