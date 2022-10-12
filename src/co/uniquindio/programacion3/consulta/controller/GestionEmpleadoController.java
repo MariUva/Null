@@ -102,6 +102,7 @@ public class GestionEmpleadoController {
 	}
 
 	private void crearEmpleado(String nombre, String codigo, String sueldo) {
+		try{
 		double sueldoAux = sueldoADouble(sueldo);
 		Empleados empleado = aplicacion.crearEmpleados(nombre, codigo, sueldoAux);
 
@@ -114,6 +115,11 @@ public class GestionEmpleadoController {
 		} else {
 			mostrarMensaje("Notificaci�n Empleado", "Empleado no guardado",
 					"El empleado " + nombre + " no ha sido guardado", AlertType.WARNING);
+		}
+
+
+		}catch (Exception ignored){
+
 		}
 
 	}
