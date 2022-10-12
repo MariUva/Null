@@ -60,7 +60,7 @@ public class Aplicacion extends Application {
 			loader.setLocation(
 					Aplicacion.class.getResource("/co/uniquindio/programacion3/consulta/view/EmpleadosView.fxml"));
 
-			AnchorPane anchorPane = (AnchorPane) loader.load();
+			AnchorPane anchorPane = loader.load();
 
 			GestionEmpleadoController gestionEmpleadoController = loader.getController();
 			gestionEmpleadoController.setAplicacion(this);
@@ -83,7 +83,7 @@ public class Aplicacion extends Application {
 			loader.setLocation(
 					Aplicacion.class.getResource("/co/uniquindio/programacion3/consulta/view/ProductoView.fxml"));
 
-			AnchorPane anchorPane = (AnchorPane) loader.load();
+			AnchorPane anchorPane = loader.load();
 
 			GestionProductoController gestionProductoController = loader.getController();
 			gestionProductoController.setAplicacion(this);

@@ -80,19 +80,11 @@ public class GestionEmpleadoController {
 		String sueldo = this.txtSueldo.getText();
 
 
-		try {
-
 			if (datosValidos(nombre, codigo, sueldo)) {
-				double sueldoAux = sueldoADouble(sueldo);
-				crearEmpleado(nombre, codigo, sueldoAux);
+				crearEmpleado(nombre, codigo, sueldo);
 				actualizarTabla();
 			}
 
-		} catch (Exception e) {
-
-			mostrarMensaje("Notificacin Empleado", "Empleado no guardado",
-					"El empleado " + nombre + " no ha sido guardado", AlertType.WARNING);
-		}
 
 		// empleadito.guardarEmpleado(empleadito.getNombre(),
 		// empleadito.getCodigo(), empleadito.getSueldo());
@@ -109,8 +101,9 @@ public class GestionEmpleadoController {
 		return sueldoAux;
 	}
 
-	private void crearEmpleado(String nombre, String codigo, double sueldo) {
-		Empleados empleado = aplicacion.crearEmpleados(nombre, codigo, sueldo);
+	private void crearEmpleado(String nombre, String codigo, String sueldo) {
+		double sueldoAux = sueldoADouble(sueldo);
+		Empleados empleado = aplicacion.crearEmpleados(nombre, codigo, sueldoAux);
 
 		// Notificar que el empleado fue guardado
 		if (empleado != null) {
@@ -171,7 +164,6 @@ public class GestionEmpleadoController {
 			}catch (Exception e){
 				notificacion += "El sueldo debe contener valores numericos";
 			}
-
 		}
 
 		if (notificacion.equals("")) {
