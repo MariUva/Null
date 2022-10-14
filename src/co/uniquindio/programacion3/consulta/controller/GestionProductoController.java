@@ -61,6 +61,9 @@ public class GestionProductoController {
 	@FXML
 	private Button btnAgregar;
 
+	/*
+	 * Metodo que permite limpiar los campos de texto en caso de tener texto
+	 */
 	@FXML
 	void limpiarProductos(ActionEvent event) {
 
@@ -70,26 +73,47 @@ public class GestionProductoController {
 
 	}
 
+	/*
+	 * Metodo que permite agregar un producto
+	 */
 	@FXML
 	void agregarProductos(ActionEvent event) {
 
 		String nombre = txtNombre.getText();
 		String codigo = txtCodigo.getText();
-		double precio = Double.parseDouble(this.txtPrecio.getText());
+		String precio = this.txtPrecio.getText();
 
-		if (datosValidos(nombre, codigo, precio)) {
-			crearProducto(nombre, codigo, precio);
+		try {
+			if (datosValidos(nombre, codigo, precio)) {
+				crearProducto(nombre, codigo, precio);
+				actualizarTabla();
+			}
+		} catch (Exception ignored) {
 
-			actualizarTabla();
 		}
 
 	}
 
-	private void crearProducto(String nombre, String codigo, double precio) {
+	private double precioADouble(String precio) {
+		double precioAux = 0;
+		try {
+			precioAux = Double.parseDouble(precio);
+		} catch (Exception e) {
+			mostrarMensaje("Advertencia", "Informaciï¿½n del producto es invalida",
+					"Ingrese un valor numerico en el precio", AlertType.WARNING);
+		}
+		return precioAux;
+	}
 
-		// Notificar al usuario que el cliente fue registrado
-		Productos producto = aplicacion.crearProductos(nombre, codigo, precio);
+	/*
+	 * Meotodo para crear un producto
+	 */
+	private void crearProducto(String nombre, String codigo, String precio) {
 
+		double precioAux = precioADouble(precio);
+		Productos producto = aplicacion.crearProductos(nombre, codigo, precioAux);
+
+		// Notificar al usuario que el producto fue registrado
 		if (producto != null) {
 			listadoProductos.add(0, producto);
 			listadoProductos.add(producto);
@@ -123,10 +147,10 @@ public class GestionProductoController {
 	/*
 	 * Metodo que permite verificar si todos los campos han sido dilingeciados
 	 */
-	private boolean datosValidos(String nombre, String codigo, double precio) {
+	private boolean datosValidos(String nombre, String codigo, String precio) {
 
+		boolean flag = true;
 		String notificacion = "";
-		// double emptyString = Double.parseDouble("");
 
 		if (nombre == null || nombre.equals("")) {
 			notificacion += "Nombre no tiene información\n";
@@ -137,11 +161,20 @@ public class GestionProductoController {
 
 		}
 
-		// if (precio == Double.parseDouble(null)) {
+		if (precio.equals("")) {
+			flag = false;
+			notificacion += "Precio no tiene informaciï¿½n\n";
 
-		// notificacion += "Precio no tiene información\n";
+		}
 
-		// }
+		if (flag) {
+			try {
+				double precioAux = Double.parseDouble(precio);
+			} catch (Exception e) {
+				notificacion += "El precio debe contener valores numericos";
+
+			}
+		}
 
 		if (notificacion.equals("")) {
 			return true;
@@ -152,6 +185,9 @@ public class GestionProductoController {
 		return false;
 	}
 
+	/*
+	 * Metodo que permite eliminar un producto
+	 */
 	@FXML
 	void eliminarProductos(ActionEvent event) {
 
@@ -174,7 +210,7 @@ public class GestionProductoController {
 
 	}
 
-	// --------------TABLA-------------------------
+	// ------------------TABLA-------------------------
 
 	ObservableList<Productos> listadoProductos = FXCollections.observableArrayList();
 

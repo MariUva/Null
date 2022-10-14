@@ -61,6 +61,9 @@ public class GestionEmpleadoController {
 	@FXML
 	private Button btnAgregar;
 
+	/*
+	 * Metodo que permite limpiar los campos de texto en caso de tener texto
+	 */
 	@FXML
 	void limpiarEmpleado(ActionEvent event) {
 
@@ -70,6 +73,9 @@ public class GestionEmpleadoController {
 
 	}
 
+	/*
+	 * Metodo que permite agregar un empleado
+	 */
 	@FXML
 	void agregarEmpleado(ActionEvent event) {
 
@@ -79,7 +85,7 @@ public class GestionEmpleadoController {
 		String codigo = txtCodigo.getText();
 		String sueldo = this.txtSueldo.getText();
 
-		try{
+		try {
 			if (datosValidos(nombre, codigo, sueldo)) {
 				crearEmpleado(nombre, codigo, sueldo);
 				actualizarTabla();
@@ -96,13 +102,18 @@ public class GestionEmpleadoController {
 		double sueldoAux = 0;
 		try {
 			sueldoAux = Double.parseDouble(sueldo);
-		}catch (Exception e){
-			mostrarMensaje("Advertencia", "Informaci�n del empleado invalida", "Ingrese un valor numerico en el sueldo", AlertType.WARNING);
+		} catch (Exception e) {
+			mostrarMensaje("Advertencia", "Informaci�n del empleado es invalida",
+					"Ingrese un valor numerico en el sueldo", AlertType.WARNING);
 		}
 		return sueldoAux;
 	}
 
+	/*
+	 * Meotodo para crear un empleado
+	 */
 	private void crearEmpleado(String nombre, String codigo, String sueldo) {
+
 		double sueldoAux = sueldoADouble(sueldo);
 		Empleados empleado = aplicacion.crearEmpleados(nombre, codigo, sueldoAux);
 
@@ -116,9 +127,6 @@ public class GestionEmpleadoController {
 			mostrarMensaje("Notificaci�n Empleado", "Empleado no guardado",
 					"El empleado " + nombre + " no ha sido guardado", AlertType.WARNING);
 		}
-
-
-
 
 	}
 
@@ -157,15 +165,15 @@ public class GestionEmpleadoController {
 
 		}
 
-		 if (sueldo.equals("")) {
-			 flag = false;
-		 	notificacion += "Sueldo no tiene informaci�n\n";
+		if (sueldo.equals("")) {
+			flag = false;
+			notificacion += "Sueldo no tiene informaci�n\n";
 
-		 }
-		if(flag){
+		}
+		if (flag) {
 			try {
 				double sueldoAux = Double.parseDouble(sueldo);
-			}catch (Exception e){
+			} catch (Exception e) {
 				notificacion += "El sueldo debe contener valores numericos";
 			}
 		}
@@ -179,30 +187,20 @@ public class GestionEmpleadoController {
 		return false;
 	}
 
-//	public Boolean verificarConvertirSueldo(String sueldo) {
-//
-//		try {
-//
-//			double sueldoOut = Double.parseDouble(sueldo);
-//			return true;
-//
-//		} catch (Exception e) {
-//
-//			return false;
-//		}
-
-//	}
-
+	/*
+	 * Meotodo que permite eliminar un empleado
+	 */
 	@FXML
 	void eliminarEmpleado(ActionEvent event) {
 
 		if (empleadoSeleccion != null) {
 			if (aplicacion.eliminarEmpleados(empleadoSeleccion.getCodigo())) {
-				mostrarMensaje("Informaci�n", "Empleado  eliminado", "El empleado ha sido eliminado", AlertType.ERROR);
+				mostrarMensaje("Informaci�n", "Empleado  eliminado", "El empleado ha sido eliminado",
+						AlertType.ERROR);
 			} else {
 
-				mostrarMensaje("Informaci�n", "Empleado selecci�n", "No se ha realizado la selecci�n de un empleado",
-						AlertType.INFORMATION);
+				mostrarMensaje("Informaci�n", "Empleado selecci�n",
+						"No se ha realizado la selecci�n de un empleado", AlertType.INFORMATION);
 
 			}
 
@@ -215,7 +213,7 @@ public class GestionEmpleadoController {
 
 	}
 
-	// ------------------TABLA-------------------------
+	// ---------------------TABLA-------------------------
 
 	ObservableList<Empleados> listadoEmpleados = FXCollections.observableArrayList();
 
