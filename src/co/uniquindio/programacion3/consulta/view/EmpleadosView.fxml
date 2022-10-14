@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="369.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.uniquindio.programacion3.consulta.controller.GestionEmpleadoController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="393.0" prefWidth="621.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.uniquindio.programacion3.consulta.controller.GestionEmpleadoController">
    <children>
-      <TableView fx:id="tableviewEmpleados" layoutX="309.0" layoutY="88.0" prefHeight="221.0" prefWidth="277.0" style="-fx-border-color: #79C3DA;">
+      <TableView fx:id="tableviewEmpleados" layoutX="309.0" layoutY="88.0" prefHeight="225.0" prefWidth="300.0" style="-fx-border-color: #79C3DA;">
         <columns>
           <TableColumn fx:id="columNombre" prefWidth="75.0" text="Nombre" />
           <TableColumn fx:id="columCodigo" prefWidth="75.0" text="Codigo" />
@@ -25,17 +25,17 @@
       <TextField fx:id="txtNombre" layoutX="30.0" layoutY="132.0" prefHeight="25.0" prefWidth="234.0" promptText="Nombre" style="-fx-border-color: #79C3DA;" />
       <TextField fx:id="txtCodigo" layoutX="30.0" layoutY="201.0" prefHeight="25.0" prefWidth="234.0" promptText="Codigo" style="-fx-border-color: #79C3DA;" />
       <TextField fx:id="txtSueldo" layoutX="30.0" layoutY="273.0" prefHeight="25.0" prefWidth="234.0" promptText="Sueldo" style="-fx-border-color: #79C3DA;" />
-      <Button fx:id="btnLimpiar" layoutX="326.0" layoutY="322.0" mnemonicParsing="false" onAction="#limpiarEmpleado" style="-fx-background-color: #fff587;" text="Limpiar">
+      <Button fx:id="btnLimpiar" layoutX="340.0" layoutY="335.0" mnemonicParsing="false" onAction="#limpiarEmpleado" style="-fx-background-color: #fff587;" text="Limpiar">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="btnEliminar" layoutX="517.0" layoutY="322.0" mnemonicParsing="false" onAction="#eliminarEmpleado" style="-fx-background-color: #fc7c7c;" text="Eliminar">
+      <Button fx:id="btnEliminar" layoutX="531.0" layoutY="335.0" mnemonicParsing="false" onAction="#eliminarEmpleado" style="-fx-background-color: #fc7c7c;" text="Eliminar">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="btnAgregar" layoutX="427.0" layoutY="322.0" mnemonicParsing="false" onAction="#agregarEmpleado" style="-fx-background-color: #7ccbfc;" text="Agregar">
+      <Button fx:id="btnAgregar" layoutX="439.0" layoutY="335.0" mnemonicParsing="false" onAction="#agregarEmpleado" style="-fx-background-color: #7ccbfc;" text="Agregar">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -55,5 +55,10 @@
             <Font name="System Bold Italic" size="42.0" />
          </font>
       </Label>
+      <Button fx:id="btnActualizar" layoutX="222.0" layoutY="335.0" mnemonicParsing="false" onAction="#actualizarEmpleado" style="-fx-background-color: #C3FF87;" text="Actualizar">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

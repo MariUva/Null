@@ -2,14 +2,30 @@ package co.uniquindio.programacion3.consulta.modell;
 
 import java.util.ArrayList;
 
-public class Empleados {
+public class Empleado {
 
+	//Atributos de la clase
 	private String nombre;
 	private String codigo;
 	private double sueldo;
 
-	private ArrayList<Empleados> empleados;
+	private ArrayList<Empleado> empleados;
 
+	// Metodo constructor
+	public Empleado(String nombre, String codigo, double sueldo, ArrayList<Empleado> empleados) {
+		super();
+		this.nombre = nombre;
+		this.codigo = codigo;
+		this.sueldo = sueldo;
+		this.empleados = empleados;
+	}
+
+	// Metodo contructor vacio
+	public Empleado() {
+		super();
+	}
+
+	// Metodo toString
 	@Override
 	public String toString() {
 		return "Empleados [nombre=" + nombre + ", codigo=" + codigo + ", sueldo=" + sueldo + "]";
@@ -40,15 +56,15 @@ public class Empleados {
 		this.sueldo = sueldo;
 	}
 
-	public ArrayList<Empleados> getEmpleados() {
+	public ArrayList<Empleado> getEmpleados() {
 		return empleados;
 	}
 
-	public void setEmpleados(ArrayList<Empleados> empleados) {
+	public void setEmpleados(ArrayList<Empleado> empleados) {
 		this.empleados = empleados;
 	}
 
-	public ArrayList<Empleados> getListaEmpleados() {
+	public ArrayList<Empleado> getListaEmpleados() {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -1,7 +1,7 @@
 package co.uniquindio.programacion3.consulta.controller;
 
 import application.Aplicacion;
-import co.uniquindio.programacion3.consulta.modell.Productos;
+import co.uniquindio.programacion3.consulta.modell.Producto;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -29,16 +29,16 @@ public class GestionProductoController {
 	private URL location;
 
 	@FXML
-	private TableView<Productos> tableviewProductos;
+	private TableView<Producto> tableviewProductos;
 
 	@FXML
-	private TableColumn<String, Productos> columNombre;
+	private TableColumn<String, Producto> columNombre;
 
 	@FXML
-	private TableColumn<String, Productos> columCodigo;
+	private TableColumn<String, Producto> columCodigo;
 
 	@FXML
-	private TableColumn<String, Productos> columPrecio;
+	private TableColumn<String, Producto> columPrecio;
 
 	@FXML
 	private TextField txtPrecio;
@@ -111,14 +111,14 @@ public class GestionProductoController {
 	private void crearProducto(String nombre, String codigo, String precio) {
 
 		double precioAux = precioADouble(precio);
-		Productos producto = aplicacion.crearProductos(nombre, codigo, precioAux);
+		Producto producto = aplicacion.crearProductos(nombre, codigo, precioAux);
 
 		// Notificar al usuario que el producto fue registrado
 		if (producto != null) {
 			listadoProductos.add(0, producto);
 			listadoProductos.add(producto);
 			mostrarMensaje("Notificacción Producto", "Producto almacenado",
-					"El producto " + producto.getNombre() + "ha sido almacenado", AlertType.INFORMATION);
+					"El producto " + producto.getNombre() + " ha sido almacenado", AlertType.INFORMATION);
 		} else {
 			mostrarMensaje("Notificación Producto", "Producto no almacenado",
 					"El producto " + nombre + " no ha sido almacenado", AlertType.WARNING);
@@ -203,8 +203,7 @@ public class GestionProductoController {
 
 			listadoProductos.remove(productoSeleccion);
 		} else {
-			mostrarMensaje("Advertencia", "Producto selección", "No se ha realizado una seleccion de un producto",
-					AlertType.ERROR);
+			mostrarMensaje("Advertencia", "Producto selección", "No se ha seleccionado un producto", AlertType.ERROR);
 
 		}
 
@@ -212,9 +211,9 @@ public class GestionProductoController {
 
 	// ------------------TABLA-------------------------
 
-	ObservableList<Productos> listadoProductos = FXCollections.observableArrayList();
+	ObservableList<Producto> listadoProductos = FXCollections.observableArrayList();
 
-	private Productos productoSeleccion;
+	private Producto productoSeleccion;
 
 	private void mostrarInformacion() {
 
@@ -272,7 +271,7 @@ public class GestionProductoController {
 
 	}
 
-	private ObservableList<Productos> getProductos() {
+	private ObservableList<Producto> getProductos() {
 		listadoProductos.addAll(modelFactoryController.getListaProductos());
 		return listadoProductos;
 	}

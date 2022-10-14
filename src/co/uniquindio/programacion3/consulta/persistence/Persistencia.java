@@ -7,9 +7,9 @@ import java.io.IOException;
 
 import java.util.ArrayList;
 
-import co.uniquindio.programacion3.consulta.modell.Empleados;
+import co.uniquindio.programacion3.consulta.modell.Empleado;
 import co.uniquindio.programacion3.consulta.modell.Empresa;
-import co.uniquindio.programacion3.consulta.modell.Productos;
+import co.uniquindio.programacion3.consulta.modell.Producto;
 
 public class Persistencia {
 
@@ -19,13 +19,13 @@ public class Persistencia {
 	public static void cargarDatosArchivos(Empresa empresa) throws FileNotFoundException, IOException {
 
 		// cargar archivo de empleados
-		ArrayList<Empleados> empleadosCargados = cargarEmpleados();
+		ArrayList<Empleado> empleadosCargados = cargarEmpleados();
 
 		if (empleadosCargados.size() > 0)
 			empresa.getListaEmpleados().addAll(empleadosCargados);
 
 		// cargar archivos productos
-		ArrayList<Productos> productosCargados = cargarProductos();
+		ArrayList<Producto> productosCargados = cargarProductos();
 
 		if (productosCargados.size() > 0)
 			empresa.getListaProductos().addAll(productosCargados);
@@ -41,23 +41,23 @@ public class Persistencia {
 	 * @throws IOException
 	 */
 
-	public static void guardarEmpleados(ArrayList<Empleados> listaEmpleados) throws IOException {
+	public static void guardarEmpleados(ArrayList<Empleado> listaEmpleados) throws IOException {
 
 		// TODO Auto-generated method stub
 		String contenido = "";
 
-		for (Empleados empleados : listaEmpleados) {
+		for (Empleado empleados : listaEmpleados) {
 			contenido += empleados.getNombre() + "," + empleados.getCodigo() + "," + empleados.getSueldo() + "\n";
 
 		}
 		ArchivoUtil.guardarArchivo(RUTA_ARCHIVO_EMPLEADOS, contenido, false);
 	}
 
-	public static void guardarProductos(ArrayList<Productos> listaProductos) throws IOException {
+	public static void guardarProductos(ArrayList<Producto> listaProductos) throws IOException {
 		// TODO Auto-generated method stub
 		String contenido = "";
 
-		for (Productos productos : listaProductos) {
+		for (Producto productos : listaProductos) {
 			contenido += productos.getNombre() + "," + productos.getCodigo() + "," + productos.getPrecio() + "\n";
 
 		}
@@ -76,16 +76,16 @@ public class Persistencia {
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 */
-	private static ArrayList<Empleados> cargarEmpleados() throws IOException {
+	private static ArrayList<Empleado> cargarEmpleados() throws IOException {
 
-		ArrayList<Empleados> empleados = new ArrayList<Empleados>();
+		ArrayList<Empleado> empleados = new ArrayList<Empleado>();
 
 		ArrayList<String> contenido = ArchivoUtil.leerArchivo(RUTA_ARCHIVO_EMPLEADOS);
 		String linea = "";
 
 		for (int i = 0; i < contenido.size(); i++) {
 			linea = contenido.get(i);
-			Empleados empleado = new Empleados();
+			Empleado empleado = new Empleado();
 			empleado.setNombre(linea.split(",")[0]);
 			empleado.setCodigo(linea.split(",")[1]);
 			empleado.setSueldo(Double.parseDouble(linea.split(",")[2]));
@@ -95,15 +95,15 @@ public class Persistencia {
 		return empleados;
 	}
 
-	public static ArrayList<Productos> cargarProductos() throws FileNotFoundException, IOException {
-		ArrayList<Productos> productos = new ArrayList<Productos>();
+	public static ArrayList<Producto> cargarProductos() throws FileNotFoundException, IOException {
+		ArrayList<Producto> productos = new ArrayList<Producto>();
 
 		ArrayList<String> contenido = ArchivoUtil.leerArchivo(RUTA_ARCHIVO_PRODUCTO);
 		String linea = "";
 
 		for (int i = 0; i < contenido.size(); i++) {
 			linea = contenido.get(i);
-			Productos producto = new Productos();
+			Producto producto = new Producto();
 			producto.setNombre(linea.split(",")[0]);
 			producto.setCodigo(linea.split(",")[1]);
 			producto.setPrecio(Double.parseDouble(linea.split(",")[2]));
@@ -123,10 +123,10 @@ public class Persistencia {
 	 * @throws IOException
 	 */
 
-	public static void guardarObjetos(ArrayList<Empleados> listEmpleados, String ruta) throws IOException {
+	public static void guardarObjetos(ArrayList<Empleado> listaEmpleados, String ruta) throws IOException {
 		String contenido = "";
 
-		for (Empleados empleadosAux : listEmpleados) {
+		for (Empleado empleadosAux : listaEmpleados) {
 
 			contenido += empleadosAux.getNombre() + "," + empleadosAux.getCodigo() + "," + empleadosAux.getSueldo()
 					+ "\n";

@@ -1,12 +1,11 @@
 package application;
 
-
 import co.uniquindio.programacion3.consulta.controller.GestionEmpleadoController;
 import co.uniquindio.programacion3.consulta.controller.GestionProductoController;
 import co.uniquindio.programacion3.consulta.controller.GestionVentanaPrincipalController;
 import co.uniquindio.programacion3.consulta.controller.ModelFactoryController;
-import co.uniquindio.programacion3.consulta.modell.Empleados;
-import co.uniquindio.programacion3.consulta.modell.Productos;
+import co.uniquindio.programacion3.consulta.modell.Empleado;
+import co.uniquindio.programacion3.consulta.modell.Producto;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -39,9 +38,6 @@ public class Aplicacion extends Application {
 			AnchorPane anchorPane = (AnchorPane) loader.load();
 			GestionVentanaPrincipalController gestionVentanaPrincipalController = loader.getController();
 			gestionVentanaPrincipalController.setAplicacion(this);
-
-			// primaryStage.setX(400);
-			// primaryStage.setY(150);
 
 			Scene scene = new Scene(anchorPane);
 			primaryStage.setScene(scene);
@@ -121,8 +117,8 @@ public class Aplicacion extends Application {
 
 	// ---------------------------PRODUCTOS----------------------------------
 
-	public Productos crearProductos(String nombre, String codigo, double precio) {
-		Productos productos = modelFactoryController.agregarProducto(nombre, codigo, precio);
+	public Producto crearProductos(String nombre, String codigo, double precio) {
+		Producto productos = modelFactoryController.agregarProducto(nombre, codigo, precio);
 		return productos;
 	}
 
@@ -133,16 +129,36 @@ public class Aplicacion extends Application {
 
 	// ----------------------------EMPLEADOS----------------------------------
 
-	public Empleados crearEmpleados(String nombre, String codigo, double sueldo) {
-		Empleados empleados = modelFactoryController.agregarEmpleado(nombre, codigo, sueldo);
+	public Empleado crearEmpleados(String nombre, String codigo, double sueldo) {
+		Empleado empleados = modelFactoryController.agregarEmpleado(nombre, codigo, sueldo);
 		return empleados;
 
 	}
+
+//	public void actualizarEmpleado(String nombre, String codigo, double sueldo) {
+//
+//		modelFactoryController.actualizarEmpleado(nombre, codigo, sueldo);
+//
+//	}
 
 	public boolean eliminarEmpleados(String codigo) {
 
 		boolean eliminarEmpleado = modelFactoryController.eliminarEmpleado(codigo);
 		return eliminarEmpleado;
 	}
+
+//	public Cliente obtenerCliente(String identificacionCliente) {
+//
+//		Cliente clienteEncontrado = null;
+//
+//		for (Cliente cliente : listaClientes) {
+//			if (cliente.getIdentificacion().equals(identificacionCliente)) {
+//				clienteEncontrado = cliente;
+//				break;
+//
+//			}
+//		}
+//		return clienteEncontrado;
+//	}
 
 }

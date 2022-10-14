@@ -4,11 +4,33 @@ import java.util.ArrayList;
 
 public class Empresa {
 
+	// Atributos de la clase
 	private String nombre;
 
-	ArrayList<Empleados> listaEmpleados = new ArrayList<Empleados>();
-	ArrayList<Productos> listaProductos = new ArrayList<Productos>();
+	ArrayList<Empleado> listaEmpleados = new ArrayList<Empleado>();
+	ArrayList<Producto> listaProductos = new ArrayList<Producto>();
 
+	// Metodo constructor
+	public Empresa(String nombre, ArrayList<Empleado> listaEmpleados, ArrayList<Producto> listaProductos) {
+		super();
+		this.nombre = nombre;
+		this.listaEmpleados = listaEmpleados;
+		this.listaProductos = listaProductos;
+	}
+
+	// Metodo constructor vacio
+	public Empresa() {
+		super();
+	}
+
+	// Metodo toString
+	@Override
+	public String toString() {
+		return "Empresa [nombre=" + nombre + ", listaEmpleados=" + listaEmpleados + ", listaProductos=" + listaProductos
+				+ "]";
+	}
+
+	// Metodos getters and setters
 	public String getNombre() {
 		return nombre;
 	}
@@ -17,37 +39,20 @@ public class Empresa {
 		this.nombre = nombre;
 	}
 
-	public ArrayList<Empleados> getListaEmpleados() {
+	public ArrayList<Empleado> getListaEmpleados() {
 		return listaEmpleados;
 	}
 
-	public void setListaEmpleados(ArrayList<Empleados> listaEmpleados) {
+	public void setListaEmpleados(ArrayList<Empleado> listaEmpleados) {
 		this.listaEmpleados = listaEmpleados;
 	}
 
-	public ArrayList<Productos> getListaProductos() {
+	public ArrayList<Producto> getListaProductos() {
 		return listaProductos;
 	}
 
-	public void setListaProductos(ArrayList<Productos> listaProductos) {
+	public void setListaProductos(ArrayList<Producto> listaProductos) {
 		this.listaProductos = listaProductos;
-	}
-
-	@Override
-	public String toString() {
-		return "Empresa [nombre=" + nombre + ", listaEmpleados=" + listaEmpleados + ", listaProductos=" + listaProductos
-				+ "]";
-	}
-
-	public Empresa(String nombre, ArrayList<Empleados> listaEmpleados, ArrayList<Productos> listaProductos) {
-		super();
-		this.nombre = nombre;
-		this.listaEmpleados = listaEmpleados;
-		this.listaProductos = listaProductos;
-	}
-
-	public Empresa() {
-		super();
 	}
 
 }

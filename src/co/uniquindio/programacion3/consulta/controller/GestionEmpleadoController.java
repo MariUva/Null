@@ -4,7 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import application.Aplicacion;
-import co.uniquindio.programacion3.consulta.modell.Empleados;
+import co.uniquindio.programacion3.consulta.modell.Empleado;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -35,16 +35,19 @@ public class GestionEmpleadoController {
 	private Button btnAtras;
 
 	@FXML
-	private TableView<Empleados> tableviewEmpleados;
+	private Button btnActualizar;
 
 	@FXML
-	private TableColumn<String, Empleados> columNombre;
+	private TableView<Empleado> tableviewEmpleados;
 
 	@FXML
-	private TableColumn<String, Empleados> columCodigo;
+	private TableColumn<String, Empleado> columNombre;
 
 	@FXML
-	private TableColumn<String, Empleados> columSueldo;
+	private TableColumn<String, Empleado> columCodigo;
+
+	@FXML
+	private TableColumn<String, Empleado> columSueldo;
 
 	@FXML
 	private TextField txtNombre;
@@ -70,6 +73,44 @@ public class GestionEmpleadoController {
 		txtNombre.clear();
 		txtCodigo.clear();
 		txtSueldo.clear();
+
+		txtCodigo.setDisable(false);
+	}
+
+	/*
+	 * Metodo que permite actualizar un empleado
+	 */
+	@FXML
+	private void actualizarEmpleado(ActionEvent event) {
+
+		String nombre = txtNombre.getText();
+		String codigo = txtCodigo.getText();
+		String sueldo = txtSueldo.getText();
+		// double sueldo = Double.parseDouble(this.txtSueldo.getText());
+
+		if (empleadoSeleccion != null) {
+
+			if (datosValidos(nombre, codigo, sueldo)) {
+
+				// double sueldoAux = sueldoADouble(sueldo);
+
+				// modelFactoryController.actualizarEmpleado(nombre, codigo,
+				// sueldo);
+
+				empleadoSeleccion.setNombre(nombre);
+				empleadoSeleccion.setCodigo(codigo);
+
+				double sueldoAux = sueldoADouble(sueldo);
+				// empleadoSeleccion.setSueldo(sueldo);
+				tableviewEmpleados.refresh();
+				mostrarMensaje("Información", "Actualizar", "El empleado ha sido actualizado.", AlertType.CONFIRMATION);
+
+			} else {
+				mostrarMensaje("Advertencia", "Actualizar", "No se ha seleccionado un empleado.", AlertType.WARNING);
+
+			}
+
+		}
 
 	}
 
@@ -115,7 +156,7 @@ public class GestionEmpleadoController {
 	private void crearEmpleado(String nombre, String codigo, String sueldo) {
 
 		double sueldoAux = sueldoADouble(sueldo);
-		Empleados empleado = aplicacion.crearEmpleados(nombre, codigo, sueldoAux);
+		Empleado empleado = aplicacion.crearEmpleados(nombre, codigo, sueldoAux);
 
 		// Notificar que el empleado fue guardado
 		if (empleado != null) {
@@ -206,8 +247,7 @@ public class GestionEmpleadoController {
 
 			listadoEmpleados.remove(empleadoSeleccion);
 		} else {
-			mostrarMensaje("Advertencia", "Empleado selecciï¿½n", "No se ha realizado una seleccion de un empleado",
-					AlertType.ERROR);
+			mostrarMensaje("Advertencia", "Empleado selecciï¿½n", "No se ha seleccionado un empleado", AlertType.ERROR);
 
 		}
 
@@ -215,9 +255,9 @@ public class GestionEmpleadoController {
 
 	// ---------------------TABLA-------------------------
 
-	ObservableList<Empleados> listadoEmpleados = FXCollections.observableArrayList();
+	ObservableList<Empleado> listadoEmpleados = FXCollections.observableArrayList();
 
-	private Empleados empleadoSeleccion;
+	private Empleado empleadoSeleccion;
 
 	private void mostrarInformacion() {
 
@@ -226,6 +266,9 @@ public class GestionEmpleadoController {
 			txtNombre.setText(empleadoSeleccion.getNombre());
 			txtCodigo.setText(empleadoSeleccion.getCodigo());
 			txtSueldo.setText(empleadoSeleccion.getSueldo() + "");
+
+			txtCodigo.setDisable(true);
+
 		}
 
 	}
@@ -274,7 +317,7 @@ public class GestionEmpleadoController {
 
 	}
 
-	private ObservableList<Empleados> getEmpleados() {
+	private ObservableList<Empleado> getEmpleados() {
 		listadoEmpleados.addAll(modelFactoryController.getListaEmpleados());
 		return listadoEmpleados;
 	}

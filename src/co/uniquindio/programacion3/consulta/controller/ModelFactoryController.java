@@ -3,9 +3,9 @@ package co.uniquindio.programacion3.consulta.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import co.uniquindio.programacion3.consulta.modell.Empleados;
+import co.uniquindio.programacion3.consulta.modell.Empleado;
 import co.uniquindio.programacion3.consulta.modell.Empresa;
-import co.uniquindio.programacion3.consulta.modell.Productos;
+import co.uniquindio.programacion3.consulta.modell.Producto;
 import co.uniquindio.programacion3.consulta.persistence.Persistencia;
 
 public class ModelFactoryController {
@@ -26,8 +26,8 @@ public class ModelFactoryController {
 		return SingletonHolder.eINSTANCE;
 	}
 
-	ArrayList<Productos> listaProductos = new ArrayList<>();
-	ArrayList<Empleados> listaEmpleados = new ArrayList<>();
+	ArrayList<Producto> listaProductos = new ArrayList<>();
+	ArrayList<Empleado> listaEmpleados = new ArrayList<>();
 
 	public ModelFactoryController() {
 
@@ -57,7 +57,7 @@ public class ModelFactoryController {
 
 		empresa = new Empresa();
 
-		Empleados empleado = new Empleados();
+		Empleado empleado = new Empleado();
 		empleado.setNombre("Alicia");
 		empleado.setCodigo("12345");
 		empleado.setSueldo(350000.0);
@@ -65,7 +65,7 @@ public class ModelFactoryController {
 		empresa.getListaEmpleados().add(empleado);
 		getListaEmpleados().add(empleado);
 
-		Empleados empleado1 = new Empleados();
+		Empleado empleado1 = new Empleado();
 		empleado1.setNombre("Carlos");
 		empleado1.setCodigo("678910");
 		empleado1.setSueldo(5000000);
@@ -73,21 +73,21 @@ public class ModelFactoryController {
 		empresa.getListaEmpleados().add(empleado1);
 		getListaEmpleados().add(empleado1);
 
-		Empleados empleado2 = new Empleados();
+		Empleado empleado2 = new Empleado();
 		empleado2.setNombre("Pedro");
 		empleado2.setCodigo("101112");
 		empleado2.setSueldo(1600000);
 		empresa.getListaEmpleados().add(empleado2);
 		getListaEmpleados().add(empleado2);
 
-		Productos producto = new Productos();
+		Producto producto = new Producto();
 		producto.setNombre("Lampara");
 		producto.setCodigo("323435");
 		producto.setPrecio(16.500);
 		empresa.getListaProductos().add(producto);
 		getListaProductos().add(producto);
 
-		Productos producto2 = new Productos();
+		Producto producto2 = new Producto();
 		producto2.setNombre("Bolso");
 		producto2.setCodigo("3344442");
 		producto2.setPrecio(100.0000);
@@ -110,19 +110,19 @@ public class ModelFactoryController {
 		return empresa;
 	}
 
-	public ArrayList<Productos> getListaProductos() {
+	public ArrayList<Producto> getListaProductos() {
 		return listaProductos;
 	}
 
-	public void setListaProductos(ArrayList<Productos> listaProductos) {
+	public void setListaProductos(ArrayList<Producto> listaProductos) {
 		this.listaProductos = listaProductos;
 	}
 
-	public ArrayList<Empleados> getListaEmpleados() {
+	public ArrayList<Empleado> getListaEmpleados() {
 		return listaEmpleados;
 	}
 
-	public void setListaEmpleados(ArrayList<Empleados> listaEmpleados) {
+	public void setListaEmpleados(ArrayList<Empleado> listaEmpleados) {
 		this.listaEmpleados = listaEmpleados;
 	}
 
@@ -132,11 +132,11 @@ public class ModelFactoryController {
 
 	// ---------------------PRODUCTO---------------------------------
 
-	public Productos agregarProducto(String nombre, String codigo, double precio) {
+	public Producto agregarProducto(String nombre, String codigo, double precio) {
 		if (existeProducto(codigo)) {
 			return null;
 		} else {
-			Productos nuevoProducto = new Productos();
+			Producto nuevoProducto = new Producto();
 			nuevoProducto.setNombre(nombre);
 			nuevoProducto.setCodigo(codigo);
 			nuevoProducto.setPrecio(precio);
@@ -148,7 +148,7 @@ public class ModelFactoryController {
 	private boolean existeProducto(String codigo) {
 
 		boolean existe = false;
-		for (Productos productos : listaProductos) {
+		for (Producto productos : listaProductos) {
 			if (productos.getCodigo().equals(codigo)) {
 				existe = true;
 				return existe;
@@ -161,7 +161,7 @@ public class ModelFactoryController {
 
 	public Boolean eliminarProducto(String codigo) {
 		Boolean flagEliminado = false;
-		Productos productos = obtenerProducto(codigo);
+		Producto productos = obtenerProducto(codigo);
 
 		if (productos != null) {
 			getListaProductos().remove(productos);
@@ -170,11 +170,11 @@ public class ModelFactoryController {
 		return flagEliminado;
 	}
 
-	public Productos obtenerProducto(String codigoProducto) {
+	public Producto obtenerProducto(String codigoProducto) {
 
-		Productos productoEncontrado = null;
+		Producto productoEncontrado = null;
 
-		for (Productos productos : listaProductos) {
+		for (Producto productos : listaProductos) {
 			if (productos.getCodigo().equals(codigoProducto)) {
 				productoEncontrado = productos;
 				break;
@@ -187,11 +187,11 @@ public class ModelFactoryController {
 
 	// ---------------------EMPLEADOS---------------------------------
 
-	public Empleados agregarEmpleado(String nombre, String codigo, double sueldo) {
+	public Empleado agregarEmpleado(String nombre, String codigo, double sueldo) {
 		if (existeEmpleado(codigo)) {
 			return null;
 		} else {
-			Empleados nuevoEmpleado = new Empleados();
+			Empleado nuevoEmpleado = new Empleado();
 			nuevoEmpleado.setNombre(nombre);
 			nuevoEmpleado.setCodigo(codigo);
 			nuevoEmpleado.setSueldo(sueldo);
@@ -203,7 +203,7 @@ public class ModelFactoryController {
 	private boolean existeEmpleado(String codigo) {
 
 		boolean existe = false;
-		for (Empleados empleados : listaEmpleados) {
+		for (Empleado empleados : listaEmpleados) {
 			if (empleados.getCodigo().equals(codigo)) {
 				existe = true;
 				return existe;
@@ -217,7 +217,7 @@ public class ModelFactoryController {
 	public Boolean eliminarEmpleado(String codigo) {
 
 		Boolean flagEliminado = false;
-		Empleados empleados = obtenerEmpleado(codigo);
+		Empleado empleados = obtenerEmpleado(codigo);
 
 		if (empleados != null) {
 			getListaEmpleados().remove(empleados);
@@ -226,11 +226,11 @@ public class ModelFactoryController {
 		return flagEliminado;
 	}
 
-	public Empleados obtenerEmpleado(String codigoEmpleado) {
+	public Empleado obtenerEmpleado(String codigoEmpleado) {
 
-		Empleados empleadoEncontrado = null;
+		Empleado empleadoEncontrado = null;
 
-		for (Empleados empleados : listaEmpleados) {
+		for (Empleado empleados : listaEmpleados) {
 			if (empleados.getCodigo().equals(codigoEmpleado)) {
 				empleadoEncontrado = empleados;
 				break;
